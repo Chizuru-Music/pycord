@@ -592,9 +592,10 @@ class CogMixin:
         if cog is None:
             return
 
-        help_command = self._help_command
-        if help_command and help_command.cog is cog:
-            help_command.cog = None
+        if hasattr(self, "_help_command"):
+            help_command = self._help_command
+            if help_command and help_command.cog is cog:
+                help_command.cog = None
         cog._eject(self)
 
         return cog
